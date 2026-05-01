@@ -1,0 +1,41 @@
+<svg width="560" height="560" viewBox="0 0 560 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="120" y1="90" x2="440" y2="470" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9AE6B4"/>
+      <stop offset="0.45" stop-color="#765FDE"/>
+      <stop offset="1" stop-color="#4EA8FF"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="210" y1="220" x2="350" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.75"/>
+    </linearGradient>
+    <filter id="s" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#091526" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <!-- soft blob -->
+  <path d="M114 264c0-89 71-160 160-160h12c89 0 160 71 160 160v12c0 89-71 160-160 160h-12c-89 0-160-71-160-160v-12Z" fill="url(#g1)" fill-opacity="0.18"/>
+
+  <!-- owl body -->
+  <g filter="url(#s)">
+    <path d="M168 255c0-74 60-134 134-134h-2c74 0 134 60 134 134v52c0 86-70 156-156 156s-156-70-156-156v-52Z" fill="url(#g1)"/>
+    <path d="M206 262c0-49 40-89 89-89h-3c49 0 89 40 89 89v29c0 58-47 105-105 105s-105-47-105-105v-29Z" fill="url(#g2)"/>
+
+    <!-- eyes -->
+    <circle cx="240" cy="250" r="42" fill="#FFFFFF" fill-opacity="0.95"/>
+    <circle cx="320" cy="250" r="42" fill="#FFFFFF" fill-opacity="0.95"/>
+    <circle cx="242" cy="255" r="16" fill="#091526"/>
+    <circle cx="318" cy="255" r="16" fill="#091526"/>
+    <circle cx="248" cy="249" r="6" fill="#FFFFFF" fill-opacity="0.9"/>
+    <circle cx="324" cy="249" r="6" fill="#FFFFFF" fill-opacity="0.9"/>
+
+    <!-- beak -->
+    <path d="M280 272c18 0 34 8 34 18 0 22-16 40-34 40s-34-18-34-40c0-10 16-18 34-18Z" fill="#FFC857"/>
+
+    <!-- badge lens -->
+    <circle cx="350" cy="345" r="34" fill="#FFFFFF" fill-opacity="0.35" stroke="#FFFFFF" stroke-opacity="0.7" stroke-width="6"/>
+    <path d="M376 370l22 22" stroke="#FFFFFF" stroke-opacity="0.8" stroke-width="10" stroke-linecap="round"/>
+  </g>
+</svg>
+

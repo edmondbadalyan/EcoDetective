@@ -1,0 +1,62 @@
+export const Assets = {
+  characters: {
+    guideOwl: '/assets/characters/guide-owl.svg',
+  },
+  cases: {
+    case1Hero: '/assets/cases/case1/case1-hero.svg',
+    case2Hero: '/assets/cases/case2/case2-hero.svg',
+    case3Hero: '/assets/cases/case3/case3-hero.svg',
+  },
+  illustrations: {
+    slime: '/assets/illustrations/slime.svg',
+    boss: '/assets/illustrations/boss.svg',
+    chicken: '/assets/illustrations/chicken.svg',
+  },
+  suspects: {
+    case1Hedgehog: '/assets/illustrations/chicken.svg',
+    case1Magpie: '/assets/illustrations/slime.svg',
+    case1Wind: '/assets/illustrations/boss.svg',
+    case2Beaver: '/assets/illustrations/chicken.svg',
+    case2Raccoon: '/assets/illustrations/slime.svg',
+    case2Troll: '/assets/illustrations/boss.svg',
+    case3Hare: '/assets/illustrations/chicken.svg',
+    case3Fox: '/assets/illustrations/slime.svg',
+    case3Hoarder: '/assets/illustrations/boss.svg',
+  },
+  ui: {
+    iconFind: '/assets/ui/icon-find.svg',
+    iconDraw: '/assets/ui/icon-draw.svg',
+    iconRead: '/assets/ui/icon-read.svg',
+  },
+  tasks: {
+    t1FindGreen: '/assets/tasks/t1-find-green.svg',
+    t2DrawSuspect: '/assets/tasks/t2-draw-suspect.svg',
+    t3ReadCipher1: '/assets/tasks/t3-read-cipher1.svg',
+    t4FindContainer: '/assets/tasks/t4-find-container.svg',
+    t5FindWaterSound: '/assets/tasks/t5-find-water-sound.svg',
+    t6DrawTracks: '/assets/tasks/t6-draw-tracks.svg',
+    t7ReadCipher2: '/assets/tasks/t7-read-cipher2.svg',
+    t8FindBlue: '/assets/tasks/t8-find-blue.svg',
+    t9FindRecycle: '/assets/tasks/t9-find-recycle.svg',
+    t10DrawCleanHero: '/assets/tasks/t10-draw-clean-hero.svg',
+    t11ReadOath: '/assets/tasks/t11-read-oath.svg',
+    t12FindGreenHelper: '/assets/tasks/t12-find-green-helper.svg',
+    t13BuildMiniGreenhouse: '/assets/tasks/t13-build-mini-greenhouse.svg',
+    t14SmellDetective: '/assets/tasks/t14-smell-detective.svg',
+    t15LightMap: '/assets/tasks/t15-light-map.svg',
+    t16WaterCompare: '/assets/tasks/t16-water-compare.svg',
+    t17DropTrail: '/assets/tasks/t17-drop-trail.svg',
+    t18WaterRhythm: '/assets/tasks/t18-water-rhythm.svg',
+    t19TrashRoute: '/assets/tasks/t19-trash-route.svg',
+    t20BatteryRescue: '/assets/tasks/t20-battery-rescue.svg',
+    t21AntiTrollPoster: '/assets/tasks/t21-anti-troll-poster.svg',
+    t22EcoPatrol: '/assets/tasks/t22-eco-patrol.svg',
+  },
+  rewards: {
+    token: '/assets/rewards/reward-token.svg',
+  },
+  decor: {
+    leaf01: '/assets/decor/decor-leaf-01.svg',
+  },
+} as const
+

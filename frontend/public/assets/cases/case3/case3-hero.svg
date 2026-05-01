@@ -1,0 +1,28 @@
+<svg width="1200" height="520" viewBox="0 0 1200 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF8ED"/>
+      <stop offset="0.5" stop-color="#F1FAF4"/>
+      <stop offset="1" stop-color="#F6F1FF"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(980 120) rotate(45) scale(260 260)">
+      <stop stop-color="#FFC857" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#FFC857" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="520" rx="48" fill="url(#bg)"/>
+  <circle cx="980" cy="120" r="260" fill="url(#glow)"/>
+
+  <!-- tidy vs chaos ribbon -->
+  <path d="M0 340c210-70 380-40 540 10 160 50 300 70 480 20 180-50 290-40 380 4v146H0V340Z" fill="#FDE68A" fill-opacity="0.55"/>
+  <path d="M0 380c240-50 420-30 590 18 170 48 310 54 462 16 152-38 210-30 248-12v118H0V380Z" fill="#BBF7D0" fill-opacity="0.55"/>
+
+  <!-- recycle icons -->
+  <g opacity="0.35">
+    <path d="M150 130l30-50h40l-22 36h38l-48 80-48-80h10Z" fill="#22C55E"/>
+    <path d="M240 240l-58 0-20-34 42 0-18-30 92 0 0 92-18-30-20 34Z" fill="#765FDE"/>
+    <path d="M1030 210l-22 36h38l-48 80-48-80h10l30-50h40Z" fill="#4EA8FF"/>
+  </g>
+</svg>
+

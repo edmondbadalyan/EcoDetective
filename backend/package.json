@@ -1,0 +1,21 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch index.js",
+    "start": "node index.js",
+    "health": "node -e \"fetch('http://localhost:5174/api/health').then(r=>{if(!r.ok)throw new Error(r.status);return r.json()}).then(j=>console.log('API health:', j)).catch(e=>{console.error(e);process.exit(1)})\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "better-sqlite3": "^12.9.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "multer": "^2.1.1",
+    "zod": "^4.3.6"
+  }
+}
