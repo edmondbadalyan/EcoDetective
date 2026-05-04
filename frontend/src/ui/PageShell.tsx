@@ -8,7 +8,14 @@ function getCompanion(tone: PageTone) {
   if (tone === 'parent') return { src: Assets.illustrations.chicken, text: 'Я слежу за очередью проверки!' }
   if (tone === 'case2') return { src: Assets.illustrations.slime, text: 'Слушай ручей и ищи следы.' }
   if (tone === 'case3') return { src: Assets.illustrations.boss, text: 'Тролль боится порядка!' }
-  return { src: Assets.characters.guideOwl, text: 'Улика рядом. Пора в путь!' }
+  const kidLines = [
+    'Улика рядом. Пора в путь!',
+    'Тсс… лес шепчет подсказку. Идём?',
+    'Сыщик, проверь след — и расскажи взрослому вывод.',
+    'Маленький шаг — большая улика.',
+    'Если застрял(а) — выбери другой след и вернись позже.',
+  ]
+  return { src: Assets.characters.guideOwl, text: kidLines[Math.floor(Math.random() * kidLines.length)] }
 }
 
 export function PageShell(props: { right?: ReactNode; children: ReactNode; tone?: PageTone }) {

@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { getTaskById } from '../../game/content'
-import { getNextTaskInCase, getOwlHouseStage, getQuickTask, getTokenBalance, latestByTask, TOKEN_GOAL, TOKEN_GOAL_TITLE } from '../../game/progress'
+import { getNextTaskInCase, getOwlHouseStage, getQuickTaskForCase, getTokenBalance, latestByTask, TOKEN_GOAL, TOKEN_GOAL_TITLE } from '../../game/progress'
 import { getSubmission, listSubmissions } from '../../lib/api'
 import { useAsync } from '../../lib/useAsync'
 import { Assets } from '../../assets'
@@ -16,7 +16,7 @@ export function RewardPage() {
   const task = submission ? getTaskById(submission.taskId) : null
   const byTask = submissions ? latestByTask(submissions) : new Map()
   const nextTask = task ? getNextTaskInCase(task.caseId, byTask, task.order) : null
-  const quickTask = getQuickTask(byTask, task?.id)
+  const quickTask = task ? getQuickTaskForCase(byTask, task.caseId, task.id) : null
   const tokenBalance = submissions ? getTokenBalance(submissions) : 0
   const owlStage = getOwlHouseStage(tokenBalance)
 
@@ -103,7 +103,6 @@ export function RewardPage() {
                     <Button to={`/kid/case/${task.caseId}`} variant="primary">
                       К следующей улике
                     </Button>
-                    <Button to="/kid">К делам</Button>
                   </div>
                 </>
               ) : (

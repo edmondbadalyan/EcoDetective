@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { getTaskById } from '../../game/content'
 import type { ClueTask } from '../../game/types'
 import { getTaskAgeContent } from '../../game/ageContent'
-import { createSubmission, uploadEvidence } from '../../lib/api'
+import { ApiError, createSubmission, uploadEvidence } from '../../lib/api'
 import { getAgeMode } from '../../lib/ageMode'
 import { Assets } from '../../assets'
 import { PageShell } from '../../ui/PageShell'
@@ -238,6 +238,18 @@ export function EvidenceUploadPage() {
 
       nav(`/kid/submitted/${submission.id}`)
     } catch (e: unknown) {
+      if (e instanceof ApiError && e.status === 409 && e.bodyText) {
+        try {
+          const parsed = JSON.parse(e.bodyText) as { existingSubmissionId?: string; submission?: { id?: string } }
+          const existingId = parsed.existingSubmissionId ?? parsed.submission?.id
+          if (existingId) {
+            nav(`/kid/submitted/${existingId}`)
+            return
+          }
+        } catch {
+          // ignore JSON parse errors and fall through to generic message
+        }
+      }
       setError(e instanceof Error ? e.message : String(e))
     } finally {
       setBusy(false)

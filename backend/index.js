@@ -43,6 +43,7 @@ if (!columns.includes('familyId')) {
   `)
 }
 db.exec(`CREATE INDEX IF NOT EXISTS idx_submissions_familyId ON submissions(familyId);`)
+db.exec(`CREATE INDEX IF NOT EXISTS idx_submissions_family_task_status ON submissions(familyId, taskId, status);`)
 
 const app = express()
 app.use(cors({ origin: true }))
@@ -98,6 +99,17 @@ app.post('/api/submissions', (req, res) => {
   const createdAt = new Date().toISOString()
   const status = 'pending'
 
+  const existingPending = db
+    .prepare(`SELECT * FROM submissions WHERE familyId = ? AND taskId = ? AND status = 'pending' ORDER BY createdAt DESC LIMIT 1`)
+    .get(familyId, parsed.data.taskId)
+  if (existingPending) {
+    return res.status(409).json({
+      error: 'already_pending',
+      existingSubmissionId: existingPending.id,
+      submission: existingPending,
+    })
+  }
+
   const stmt = db.prepare(`
     INSERT INTO submissions (id, familyId, taskId, createdAt, status, note, photoUrl, audioUrl, parentFeedback)
     VALUES (@id, @familyId, @taskId, @createdAt, @status, @note, @photoUrl, @audioUrl, NULL)
@@ -152,6 +164,13 @@ function setStatus(req, res, nextStatus) {
   const familyId = getFamilyId(req)
   const row = db.prepare(`SELECT * FROM submissions WHERE id = ? AND familyId = ?`).get(req.params.id, familyId)
   if (!row) return res.status(404).send('not found')
+  if (row.status !== 'pending') {
+    return res.status(409).json({
+      error: 'not_pending',
+      message: `cannot change status from ${row.status}`,
+      submission: row,
+    })
+  }
 
   const parsed = ReviewBody.safeParse(req.body ?? {})
   if (!parsed.success) return res.status(400).json(parsed.error.format())

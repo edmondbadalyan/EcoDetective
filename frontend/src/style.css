@@ -2050,6 +2050,7 @@ a {
   max-height: 136px;
   object-fit: contain;
   filter: drop-shadow(0 18px 18px rgba(7, 7, 35, 0.28));
+  animation: companionWiggle 8.5s ease-in-out infinite;
 }
 
 .companionBubble {
@@ -2369,6 +2370,25 @@ a {
   12% {
     opacity: 1;
     transform: translateY(-4px) scale(1.03);
+  }
+}
+
+@keyframes companionWiggle {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  10% {
+    transform: translateY(-3px) rotate(-2deg);
+  }
+  20% {
+    transform: translateY(0) rotate(2deg);
+  }
+  35% {
+    transform: translateY(-2px) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(0) rotate(1deg);
   }
 }
 
