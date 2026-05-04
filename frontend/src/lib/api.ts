@@ -3,13 +3,24 @@ import { getFamilyId } from './family'
 
 const API_BASE = import.meta.env.VITE_API_BASE ?? 'http://localhost:5174'
 
+export class ApiError extends Error {
+  status: number
+  bodyText?: string
+  constructor(message: string, status: number, bodyText?: string) {
+    super(message)
+    this.name = 'ApiError'
+    this.status = status
+    this.bodyText = bodyText
+  }
+}
+
 async function http<T>(path: string, init?: RequestInit): Promise<T> {
   const headers = new Headers(init?.headers)
   headers.set('x-family-id', getFamilyId())
   const res = await fetch(`${API_BASE}${path}`, { ...init, headers })
   if (!res.ok) {
     const text = await res.text().catch(() => '')
-    throw new Error(`HTTP ${res.status} ${res.statusText}${text ? `: ${text}` : ''}`)
+    throw new ApiError(`HTTP ${res.status} ${res.statusText}${text ? `: ${text}` : ''}`, res.status, text)
   }
   return (await res.json()) as T
 }

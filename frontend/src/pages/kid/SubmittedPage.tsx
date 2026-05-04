@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { getTaskById } from '../../game/content'
-import { getQuickTask, latestByTask } from '../../game/progress'
+import { getQuickTaskForCase, latestByTask } from '../../game/progress'
 import { getSubmission, listSubmissions } from '../../lib/api'
 import { useAsync } from '../../lib/useAsync'
 import { Assets } from '../../assets'
@@ -22,7 +22,7 @@ export function SubmittedPage() {
 
   const task = submission ? getTaskById(submission.taskId) : null
   const byTask = submissions ? latestByTask(submissions) : new Map()
-  const quickTask = getQuickTask(byTask, task?.id)
+  const quickTask = task ? getQuickTaskForCase(byTask, task.caseId, task.id) : null
   const isApproved = submission?.status === 'approved'
   const isRejected = submission?.status === 'rejected'
 
@@ -97,15 +97,10 @@ export function SubmittedPage() {
                     Добавить подсказку и отправить снова
                   </Button>
                 ) : null}
-                {!isApproved && !isRejected ? (
-                  <Button to={`/parent/review/${submissionId}`} variant="primary">
-                    Взрослому: открыть штаб
-                  </Button>
-                ) : null}
                 {!isApproved && !isRejected && quickTask ? (
                   <Button to={`/kid/task/${quickTask.id}`}>Пойти по другому следу: ~{quickTask.expectedMinutes} мин</Button>
                 ) : null}
-                <Button to="/kid">Вернуться к делам</Button>
+                <Button to="/kid">К делам</Button>
               </div>
             </div>
           </CardInner>

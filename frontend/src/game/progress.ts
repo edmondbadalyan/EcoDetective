@@ -1,5 +1,6 @@
 import { CLUE_TASKS, getTasksForCase } from './content'
 import type { CaseId, ClueTask, Submission } from './types'
+import { getFamilyId } from '../lib/family'
 
 export const TOKEN_GOAL = 50
 export const TOKEN_GOAL_TITLE = 'Домик мудрой совы'
@@ -62,6 +63,39 @@ export function getQuickTask(byTask: Map<string, Submission>, excludeTaskId?: st
   return CLUE_TASKS
     .filter((task) => task.id !== excludeTaskId && byTask.get(task.id)?.status !== 'approved')
     .sort((a, b) => a.expectedMinutes - b.expectedMinutes || a.order - b.order)[0] ?? null
+}
+
+function quickTaskKey(familyId: string, caseId: CaseId) {
+  return `eco_quick_task:${familyId}:${caseId}`
+}
+
+export function getQuickTaskForCase(
+  byTask: Map<string, Submission>,
+  caseId: CaseId,
+  excludeTaskId?: string,
+) {
+  const candidates = CLUE_TASKS
+    .filter((task) => task.caseId === caseId)
+    .filter((task) => task.id !== excludeTaskId)
+    .filter((task) => byTask.get(task.id)?.status !== 'approved')
+    .sort((a, b) => a.expectedMinutes - b.expectedMinutes || a.order - b.order)
+
+  if (candidates.length === 0) return null
+
+  const familyId = getFamilyId()
+  const key = quickTaskKey(familyId, caseId)
+  const saved = localStorage.getItem(key)
+  const savedCandidate = saved ? candidates.find((t) => t.id === saved) : undefined
+  if (savedCandidate) return savedCandidate
+
+  // Avoid suggesting the same quick task twice in a row if possible.
+  const lastKey = `${key}:last`
+  const last = localStorage.getItem(lastKey)
+  const picked = candidates.find((t) => t.id !== last) ?? candidates[0]
+
+  localStorage.setItem(key, picked.id)
+  localStorage.setItem(lastKey, picked.id)
+  return picked
 }
 
 export function getSubmissionAction(task: ClueTask, submission?: Submission) {
